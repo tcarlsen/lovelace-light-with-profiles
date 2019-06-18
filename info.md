@@ -1,4 +1,4 @@
-![demo](./demo.gif)
+![demo](https://github.com/tcarlsen/lovelace-light-with-profiles/raw/master/demo.gif)
 
 ## Usage
 
