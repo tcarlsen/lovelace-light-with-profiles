@@ -1,8 +1,4 @@
-import {
-  LitElement,
-  html,
-  css
-} from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
+import { LitElement, html, css } from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
 
 class LightWithProfiles extends LitElement {
   static get properties() {
@@ -15,12 +11,7 @@ class LightWithProfiles extends LitElement {
   constructor() {
     super();
 
-    this.lightProfiles = {
-      // Add your profiles here to show what profile is active
-      // bright: '0.457,0.408,254',
-      // dimmed: '0.457,0.408,77',
-      // nightlight: '0.509,0.411,1'
-    };
+    this.lightProfiles = {};
   }
 
   render() {
@@ -90,6 +81,13 @@ class LightWithProfiles extends LitElement {
     if (!config.entities) {
       throw new Error("You need to define entities");
     }
+
+    const ll = this.getLovelace();
+
+    if (ll.config && ll.config.light_profiles) {
+      this.lightProfiles = ll.config.light_profiles;
+    }
+
     this.config = config;
   }
 
@@ -133,6 +131,24 @@ class LightWithProfiles extends LitElement {
         cursor: pointer;
       }
     `;
+  }
+  // https://github.com/custom-cards/custom-card-helpers/blob/master/src/get-lovelace.ts
+  getLovelace() {
+    let root = document.querySelector('home-assistant');
+    root = root && root.shadowRoot;
+    root = root && root.querySelector('home-assistant-main');
+    root = root && root.shadowRoot;
+    root = root && root.querySelector('app-drawer-layout partial-panel-resolver');
+    root = root && root.shadowRoot || root;
+    root = root && root.querySelector('ha-panel-lovelace');
+    root = root && root.shadowRoot;
+    root = root && root.querySelector('hui-root');
+    if (root) {
+        const ll = root.lovelace;
+        ll.current_view = root.___curView;
+        return ll;
+    }
+    return null;
   }
 }
 

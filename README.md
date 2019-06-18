@@ -14,14 +14,13 @@ resources:
     url: /local/light-with-profiles.js
 ```
 
-2. Sadly theres no way for a card to read config files so, if you like the card to be able to show wich profiles are active *(change color)* you will need to add your profiles inside the `light-with-profiles.js` aswell:
+2. If you like the card to be able to show wich profiles are active *(change color)* you will need to add your profiles defined in `light_profiles.csv` in your `lovelace.yaml` like so:
 
-```javascript
-this.lightProfiles = {
-	bright: '0.457,0.408,254',
-	dimmed: '0.457,0.408,77',
-	nightlight: '0.509,0.411,1'
-};
+```yaml
+light_profiles:
+  bright: '0.457,0.408,254'
+  dimmed: '0.457,0.408,77'
+  nightlight: '0.509,0.411,1'
 ```
 
 3. Lastly add the custom card:
@@ -73,4 +72,3 @@ entities:
   - entity: light.entreen
   - entity: light.kokken
 ```
-
