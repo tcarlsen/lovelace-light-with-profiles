@@ -19,7 +19,7 @@ light_profiles:
   nightlight: '0.509,0.411,1'
 ```
 
-Now your ready to add the custom card:
+Now you're ready to add the custom card:
 
 ```yaml
 type: 'custom:light-with-profiles'
