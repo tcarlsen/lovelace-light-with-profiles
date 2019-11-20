@@ -39,7 +39,7 @@ class LightWithProfiles extends LitElement {
                         })
                       : ''}
                   </div>
-                  <paper-toggle-button ?checked="${stateObj.state === 'on'}" @click="${() => this.toggleLight(ent.entity)}"></paper-toggle-button>
+                  <ha-switch ?checked="${stateObj.state === 'on'}" @click="${() => this.toggleLight(ent.entity)}"></ha-switch>
                 `
               : 'Entity not found!';
           })}
