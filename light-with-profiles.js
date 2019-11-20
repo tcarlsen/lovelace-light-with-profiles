@@ -29,7 +29,15 @@ class LightWithProfiles extends LitElement {
             const stateObj = this.hass.states[ent.entity];
             return stateObj
               ? html`
-                  <span class="label">${ent.name ? ent.name : stateObj.attributes.friendly_name}</span>
+                  <span class="label">
+                    ${ent.name ? ent.name : stateObj.attributes.friendly_name}
+                    ${this.config.debug
+                      ? html`
+                          <small>x,y: ${stateObj.attributes.xy_color ? stateObj.attributes.xy_color.toString() : 'null'}</small>
+                          <small>brightness: ${stateObj.attributes.brightness ? stateObj.attributes.brightness.toString() : 'null'}</small>
+                        `
+                      : ''}
+                  </span>
                   <div class="profiles">
                     ${ent.profiles
                       ? ent.profiles.map(profile => {

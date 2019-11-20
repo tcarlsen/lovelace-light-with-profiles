@@ -74,5 +74,19 @@ entities:
   - entity: light.kokken
 ```
 
+## Debug
+
+To show the current values of your lights you can add the `debug` attribute
+
+```yaml
+type: 'custom:light-with-profiles'
+title: Lys
+debug: true
+entities:
+  - entity: light.spisestuen
+  - entity: light.entreen
+  - entity: light.kokken
+```
+
 ---
 <a href="https://www.buymeacoffee.com/tcarlsen" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
