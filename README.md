@@ -30,6 +30,7 @@ type: 'custom:light-with-profiles'
 title: Lys
 entities:
   - entity: light.spisestuen
+    name: 'Override Light Name'
     profiles:
       - name: bright
         icon: 'mdi:brightness-5'

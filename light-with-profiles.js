@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
+import { LitElement, html, css } from 'https://unpkg.com/lit-element@2.0.1/lit-element.js?module';
 
 class LightWithProfiles extends LitElement {
   static get properties() {
@@ -17,33 +17,29 @@ class LightWithProfiles extends LitElement {
   render() {
     return html`
       <ha-card>
-        ${this.config.title ? html`
-          <div class="card-header">
-            <div class="name">${this.config.title}</div>
-            </div>
-        ` : ''}
+        ${this.config.title
+          ? html`
+              <div class="card-header">
+                <div class="name">${this.config.title}</div>
+              </div>
+            `
+          : ''}
         <div class="card-content entities">
           ${this.config.entities.map(ent => {
             const stateObj = this.hass.states[ent.entity];
             return stateObj
               ? html`
-                  <span class="label">${stateObj.attributes.friendly_name}</span>
+                  <span class="label">${ent.name ? ent.name : stateObj.attributes.friendly_name}</span>
                   <div class="profiles">
-                    ${ent.profiles ? ent.profiles.map(profile => {
-                      return html`
-                        <ha-icon class="profile-icon"
-                          ?active="${this.profileClass(stateObj, profile.name)}"
-                          .icon="${profile.icon}"
-                          .title="${profile.name}"
-                          @click="${() => this.turnOnProfile(ent.entity, profile.name)}"
-                        ></ha-icon>
-                      `;
-                    }) : ''}
+                    ${ent.profiles
+                      ? ent.profiles.map(profile => {
+                          return html`
+                            <ha-icon class="profile-icon" ?active="${this.profileClass(stateObj, profile.name)}" .icon="${profile.icon}" .title="${profile.name}" @click="${() => this.turnOnProfile(ent.entity, profile.name)}"></ha-icon>
+                          `;
+                        })
+                      : ''}
                   </div>
-                  <paper-toggle-button
-                    ?checked="${stateObj.state === 'on'}"
-                    @click="${() => this.toggleLight(ent.entity)}"
-                  ></paper-toggle-button>
+                  <paper-toggle-button ?checked="${stateObj.state === 'on'}" @click="${() => this.toggleLight(ent.entity)}"></paper-toggle-button>
                 `
               : 'Entity not found!';
           })}
@@ -53,15 +49,15 @@ class LightWithProfiles extends LitElement {
   }
 
   toggleLight(entity) {
-    this.hass.callService("homeassistant", "toggle", {
+    this.hass.callService('homeassistant', 'toggle', {
       entity_id: entity
     });
   }
 
   turnOnProfile(entity, pro) {
     this.hass.callService('light', 'turn_on', {
-      'entity_id': entity,
-      'profile': pro
+      entity_id: entity,
+      profile: pro
     });
   }
 
@@ -79,7 +75,7 @@ class LightWithProfiles extends LitElement {
 
   setConfig(config) {
     if (!config.entities) {
-      throw new Error("You need to define entities");
+      throw new Error('You need to define entities');
     }
 
     const ll = this.getLovelace();
@@ -139,14 +135,14 @@ class LightWithProfiles extends LitElement {
     root = root && root.querySelector('home-assistant-main');
     root = root && root.shadowRoot;
     root = root && root.querySelector('app-drawer-layout partial-panel-resolver');
-    root = root && root.shadowRoot || root;
+    root = (root && root.shadowRoot) || root;
     root = root && root.querySelector('ha-panel-lovelace');
     root = root && root.shadowRoot;
     root = root && root.querySelector('hui-root');
     if (root) {
-        const ll = root.lovelace;
-        ll.current_view = root.___curView;
-        return ll;
+      const ll = root.lovelace;
+      ll.current_view = root.___curView;
+      return ll;
     }
     return null;
   }
