@@ -1,0 +1,6 @@
+{
+  "name": "Light with profiles",
+  "content_in_root": true,
+  "filename": "light-with-profiles.js",
+  "homeassistant": "0.100.0"
+}
