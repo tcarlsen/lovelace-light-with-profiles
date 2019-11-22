@@ -23,6 +23,7 @@ light_profiles:
   bright: '0.457,0.408,254'
   dimmed: '0.457,0.408,77'
   nightlight: '0.509,0.411,1'
+  brightness_only: '0,0,150'
 ```
 
 3. Lastly add the custom card:

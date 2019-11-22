@@ -70,8 +70,14 @@ class LightWithProfiles extends LitElement {
   }
 
   profileClass(stateObj, profile) {
-    if (stateObj.attributes.xy_color && stateObj.attributes.brightness) {
-      const activeProfile = `${stateObj.attributes.xy_color.toString()},${stateObj.attributes.brightness.toString()}`;
+    let XYcolor = '0,0';
+
+    if (stateObj.attributes.xy_color) {
+      XYcolor = stateObj.attributes.xy_color.toString();
+    }
+
+    if (stateObj.attributes.brightness) {
+      const activeProfile = `${XYcolor},${stateObj.attributes.brightness.toString()}`;
 
       if (activeProfile === this.lightProfiles[profile]) {
         return true;
