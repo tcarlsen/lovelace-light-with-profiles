@@ -33,7 +33,10 @@ class LightWithProfiles extends LitElement {
                       ? html`
                           <ha-icon class="entity-icon" ?active="${stateObj.state === 'on'}" .icon="${ent.icon}"></ha-icon>
                         `
-                      : ''}
+                      : html`
+                          <span></span>
+                      `
+                  }
                   <span class="label">
                     ${ent.name ? ent.name : stateObj.attributes.friendly_name}
                     ${this.config.debug
