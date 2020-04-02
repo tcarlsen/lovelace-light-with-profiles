@@ -29,14 +29,7 @@ class LightWithProfiles extends LitElement {
             const stateObj = this.hass.states[ent.entity];
             return stateObj
               ? html`
-                  ${ent.icon
-                      ? html`
-                          <ha-icon class="entity-icon" ?active="${stateObj.state === 'on'}" .icon="${ent.icon}"></ha-icon>
-                        `
-                      : html`
-                          <span></span>
-                      `
-                  }
+                  <ha-icon class="entity-icon" ?active="${stateObj.state === 'on'}" .icon="${ent.icon ? ent.icon : stateObj.attributes.icon}" @click="${() => this.toggleLight(ent.entity)}"></ha-icon>
                   <span class="label">
                     ${ent.name ? ent.name : stateObj.attributes.friendly_name}
                     ${this.config.debug
