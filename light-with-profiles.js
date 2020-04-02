@@ -29,6 +29,7 @@ class LightWithProfiles extends LitElement {
             const stateObj = this.hass.states[ent.entity];
             return stateObj
               ? html`
+                  <ha-icon class="entity-icon" ?active="${stateObj.state === 'on'}" .icon="${ent.icon ? ent.icon : stateObj.attributes.icon}" @click="${() => this.toggleLight(ent.entity)}"></ha-icon>
                   <span class="label">
                     ${ent.name ? ent.name : stateObj.attributes.friendly_name}
                     ${this.config.debug
@@ -109,9 +110,17 @@ class LightWithProfiles extends LitElement {
     return css`
       .entities {
         display: grid;
-        grid-template-columns: auto auto 46px;
+        grid-template-columns: 24px auto auto 46px;
         gap: 16px 10px;
         margin-top: 8px;
+      }
+
+      .entity-icon {
+        fill: var(--disabled-text-color);
+      }
+
+      .entity-icon[active] {
+        fill: var(--primary-color);
       }
 
       .label {
