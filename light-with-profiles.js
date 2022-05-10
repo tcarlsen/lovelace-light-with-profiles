@@ -72,15 +72,16 @@ class LightWithProfiles extends LitElement {
 
   profileClass(stateObj, profile) {
     let XYcolor = '0,0';
+    let lightProfile = [];
 
     if (stateObj.attributes.xy_color) {
-      XYcolor = stateObj.attributes.xy_color.toString();
+      XYcolor = stateObj.attributes.xy_color.map(val => val.toFixed(1));
+      lightProfile = this.lightProfiles[profile].split(',').map(val => parseFloat(val).toFixed(1));
     }
 
     if (stateObj.attributes.brightness) {
-      const activeProfile = `${XYcolor},${stateObj.attributes.brightness.toString()}`;
-
-      if (activeProfile === this.lightProfiles[profile]) {
+      const activeProfile = `${XYcolor},${stateObj.attributes.brightness.toFixed(1).toString()}`;
+      if (activeProfile === lightProfile.toString()) {
         return true;
       }
     }
@@ -116,11 +117,11 @@ class LightWithProfiles extends LitElement {
       }
 
       .entity-icon {
-        fill: var(--disabled-text-color);
+        color: var(--disabled-text-color);
       }
 
       .entity-icon[active] {
-        fill: var(--primary-color);
+        color: var(--primary-color);
       }
 
       .label {
@@ -139,11 +140,11 @@ class LightWithProfiles extends LitElement {
 
       .profile-icon {
         cursor: pointer;
-        fill: var(--disabled-text-color);
+        color: var(--disabled-text-color);
       }
 
       .profile-icon[active] {
-        fill: var(--primary-color);
+        color: var(--primary-color);
       }
 
       paper-toggle-button {
